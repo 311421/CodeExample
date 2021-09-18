@@ -12,6 +12,11 @@ namespace Isu.Objects
             _groupName = name;
         }
 
+        public string Name()
+        {
+            return _groupName;
+        }
+
         public List<Student> StudentList()
         {
             return _students;

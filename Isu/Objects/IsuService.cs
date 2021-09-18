@@ -23,5 +23,30 @@ namespace Isu.Objects
             return _groups.SelectMany(currentGroup =>
                 currentGroup.StudentList()).FirstOrDefault(currentStudent => currentStudent.Id() == id);
         }
+
+        public Student FindStudent(string name)
+        {
+            return _groups.SelectMany(currentGroup =>
+                currentGroup.StudentList()).FirstOrDefault(currentStudent => currentStudent.Name() == name);
+        }
+
+        public List<Student> FindStudents(Group groupName)
+        {
+            return groupName.StudentList();
+        }
+
+        public List<Student> FindStudents(CourseNumber courseNumber)
+        {
+            var output = new List<Student>();
+            foreach (Group group in _groups)
+            {
+                if (group.Name()[2] == (int)courseNumber)
+                {
+                    output.AddRange(group.StudentList());
+                }
+            }
+
+            return output;
+        }
     }
 }
