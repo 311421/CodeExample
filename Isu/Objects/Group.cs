@@ -12,9 +12,10 @@ namespace Isu.Objects
             _groupName = name;
         }
 
-        public void AddStudent(string name)
+        public Student AddStudent(string name)
         {
             _students.Add(new Student(name, this));
+            return _students[^0];
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Isu.Objects
 
         public Student AddStudent(Group @group, string name)
         {
-            group.AddStudent(name);
+            return group.AddStudent(name);
         }
     }
 }
