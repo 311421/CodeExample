@@ -1,9 +1,11 @@
-﻿namespace Isu.Services
+﻿using Isu.Objects;
+
+namespace Isu.Services
 {
     public interface IIsuService
     {
-        // Group AddGroup(string name);
-        // Student AddStudent(Group group, string name);
+        Group AddGroup(string name);
+        Student AddStudent(Group group, string name);
 
         // Student GetStudent(int id);
         // Student FindStudent(string name);
