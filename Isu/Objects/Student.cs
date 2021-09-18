@@ -2,13 +2,14 @@
 {
     public class Student
     {
+        private static int uniqueStudentId = 0;
         private string _name;
-        private Group _studentGroup;
-
+        private int _studentId;
         public Student(string name, Group group)
         {
             _name = name;
-            _studentGroup = group;
+            _studentId = uniqueStudentId + 100000;
+            uniqueStudentId = (uniqueStudentId + 1) % 900000;
         }
     }
 }
