@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Isu.Services;
 
 namespace Isu.Objects
@@ -15,6 +16,12 @@ namespace Isu.Objects
         public Student AddStudent(Group @group, string name)
         {
             return group.AddStudent(name);
+        }
+
+        public Student GetStudent(int id)
+        {
+            return _groups.SelectMany(currentGroup =>
+                currentGroup.StudentList()).FirstOrDefault(currentStudent => currentStudent.Id() == id);
         }
     }
 }

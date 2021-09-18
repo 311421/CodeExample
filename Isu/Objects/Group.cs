@@ -12,6 +12,11 @@ namespace Isu.Objects
             _groupName = name;
         }
 
+        public List<Student> StudentList()
+        {
+            return _students;
+        }
+
         public Student AddStudent(string name)
         {
             _students.Add(new Student(name, this));

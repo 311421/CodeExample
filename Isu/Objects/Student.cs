@@ -1,4 +1,6 @@
-﻿namespace Isu.Objects
+﻿using System.Data.Common;
+
+namespace Isu.Objects
 {
     public class Student
     {
@@ -10,6 +12,11 @@
             _name = name;
             _studentId = uniqueStudentId + 100000;
             uniqueStudentId = (uniqueStudentId + 1) % 900000;
+        }
+
+        public int Id()
+        {
+            return _studentId;
         }
     }
 }
