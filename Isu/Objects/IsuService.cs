@@ -38,15 +38,22 @@ namespace Isu.Objects
         public List<Student> FindStudents(CourseNumber courseNumber)
         {
             var output = new List<Student>();
-            foreach (Group group in _groups)
+            foreach (Group @group in _groups.Where(@group => @group.Name()[2] == (int)courseNumber))
             {
-                if (group.Name()[2] == (int)courseNumber)
-                {
-                    output.AddRange(group.StudentList());
-                }
+                output.AddRange(@group.StudentList());
             }
 
             return output;
+        }
+
+        public Group FindGroup(string groupName)
+        {
+            return _groups.FirstOrDefault(@group => @group.Name() == groupName);
+        }
+
+        public List<Group> FindGroups(CourseNumber courseNumber)
+        {
+            return _groups.Where(group => @group.Name()[2] == (int)courseNumber).ToList();
         }
     }
 }
