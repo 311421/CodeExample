@@ -12,14 +12,14 @@ namespace Isu.Objects
                 throw new IsuException("Incorrect group name");
             }
 
-            if ((name[0] <= 'a') || (name[0] >= 'Z'))
+            if ((name[0] <= 'A') || (name[0] >= 'z'))
             {
                 throw new IsuException("Incorrect group name");
             }
 
             for (int i = 1; i < 5; i++)
             {
-                if (name[i] <= '1' || name[i] >= '9')
+                if (name[i] < '0' || name[i] > '9')
                 {
                     throw new IsuException("Incorrect group name");
                 }
@@ -38,7 +38,7 @@ namespace Isu.Objects
             }
 
             Students.Add(new Student(name, this));
-            return Students[^0];
+            return Students[^1];
         }
     }
 }
