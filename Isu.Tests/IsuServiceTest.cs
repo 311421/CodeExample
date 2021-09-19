@@ -1,3 +1,4 @@
+using Isu.Objects;
 using Isu.Services;
 using Isu.Tools;
 using NUnit.Framework;
@@ -11,14 +12,25 @@ namespace Isu.Tests
         [SetUp]
         public void Setup()
         {
-            //TODO: implement
-            _isuService = null;
+            _isuService = new IsuService();
         }
 
         [Test]
         public void AddStudentToGroup_StudentHasGroupAndGroupContainsStudent()
         {
-            Assert.Fail();
+            Group newGroup = _isuService.AddGroup("M3208");
+            Student newStudent = _isuService.AddStudent(newGroup, "Vasya Pupkin");
+            if (_isuService.GetStudent(newStudent.StudentId) != newStudent)
+            {
+                Assert.Fail();
+            }
+
+            if (newGroup != newStudent.StudentGroup)
+            {
+                Assert.Fail();
+            }
+            
+            Assert.Pass();
         }
 
         [Test]
@@ -26,7 +38,11 @@ namespace Isu.Tests
         {
             Assert.Catch<IsuException>(() =>
             {
-                
+                Group newGroup = _isuService.AddGroup("M3101");
+                for (int i = 0;; i++)
+                {
+                    _isuService.AddStudent(newGroup, "" + i);
+                }
             });
         }
 
@@ -35,17 +51,23 @@ namespace Isu.Tests
         {
             Assert.Catch<IsuException>(() =>
             {
-
+                _isuService.AddGroup("[eqkj ns t,fyjt");
             });
         }
 
         [Test]
         public void TransferStudentToAnotherGroup_GroupChanged()
         {
-            Assert.Catch<IsuException>(() =>
+            Group firstGroup = _isuService.AddGroup("M3208");
+            Group secondGroup = _isuService.AddGroup("M3209");
+            Student newStudent = _isuService.AddStudent(firstGroup, "Vasya Pupkin");
+            _isuService.ChangeStudentGroup(newStudent, secondGroup);
+            if (newStudent.StudentGroup == secondGroup)
             {
+                Assert.Pass();
+            }
 
-            });
+            Assert.Fail();
         }
     }
 }
