@@ -5,23 +5,22 @@ namespace Isu.Objects
     public class Student
     {
         private static int _uniqueStudentId = 0;
-        private string _name;
-        private int _studentId;
         public Student(string name, Group group)
         {
-            _name = name;
-            _studentId = _uniqueStudentId + 100000;
+            Name = name;
+            StudentGroup = group;
+            StudentId = _uniqueStudentId + 100000;
             _uniqueStudentId = (_uniqueStudentId + 1) % 900000;
         }
 
-        public int Id()
+        public string Name { get; }
+        public int StudentId { get; }
+        public Group StudentGroup { get; private set; }
+        public void ChangeGroup(Group newGroup)
         {
-            return _studentId;
-        }
-
-        public string Name()
-        {
-            return _name;
+            StudentGroup.Students.Remove(this);
+            newGroup.Students.Add(this);
+            StudentGroup = newGroup;
         }
     }
 }

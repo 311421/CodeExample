@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Isu.Services;
+using Isu.Tools;
 
 namespace Isu.Objects
 {
@@ -21,26 +22,26 @@ namespace Isu.Objects
         public Student GetStudent(int id)
         {
             return _groups.SelectMany(currentGroup =>
-                currentGroup.StudentList()).FirstOrDefault(currentStudent => currentStudent.Id() == id);
+                currentGroup.Students).FirstOrDefault(currentStudent => currentStudent.StudentId == id);
         }
 
         public Student FindStudent(string name)
         {
             return _groups.SelectMany(currentGroup =>
-                currentGroup.StudentList()).FirstOrDefault(currentStudent => currentStudent.Name() == name);
+                currentGroup.Students).FirstOrDefault(currentStudent => currentStudent.Name == name);
         }
 
         public List<Student> FindStudents(Group groupName)
         {
-            return groupName.StudentList();
+            return groupName.Students;
         }
 
         public List<Student> FindStudents(CourseNumber courseNumber)
         {
             var output = new List<Student>();
-            foreach (Group @group in _groups.Where(@group => @group.Name()[2] == (int)courseNumber))
+            foreach (Group @group in _groups.Where(@group => @group.GroupName[2] == (int)courseNumber))
             {
-                output.AddRange(@group.StudentList());
+                output.AddRange(@group.Students);
             }
 
             return output;
@@ -48,12 +49,22 @@ namespace Isu.Objects
 
         public Group FindGroup(string groupName)
         {
-            return _groups.FirstOrDefault(@group => @group.Name() == groupName);
+            return _groups.FirstOrDefault(@group => @group.GroupName == groupName);
         }
 
         public List<Group> FindGroups(CourseNumber courseNumber)
         {
-            return _groups.Where(group => @group.Name()[2] == (int)courseNumber).ToList();
+            return _groups.Where(group => @group.GroupName[2] == (int)courseNumber).ToList();
+        }
+
+        public void ChangeStudentGroup(Student student, Group newGroup)
+        {
+            if (newGroup.Students.Count >= 25)
+            {
+                throw new IsuException("Target group has reached its size limit");
+            }
+
+            student.ChangeGroup(newGroup);
         }
     }
 }

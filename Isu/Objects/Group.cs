@@ -1,31 +1,44 @@
 ﻿using System.Collections.Generic;
+using Isu.Tools;
 
 namespace Isu.Objects
 {
     public class Group
     {
-        private List<Student> _students = new List<Student>();
-        private string _groupName;
-
         public Group(string name)
         {
-            _groupName = name;
+            if (name.Length != 5)
+            {
+                throw new IsuException("Incorrect group name");
+            }
+
+            if ((name[0] <= 'a') || (name[0] >= 'Z'))
+            {
+                throw new IsuException("Incorrect group name");
+            }
+
+            for (int i = 1; i < 5; i++)
+            {
+                if (name[i] <= '1' || name[i] >= '9')
+                {
+                    throw new IsuException("Incorrect group name");
+                }
+            }
+
+            GroupName = name;
         }
 
-        public string Name()
-        {
-            return _groupName;
-        }
-
-        public List<Student> StudentList()
-        {
-            return _students;
-        }
-
+        public List<Student> Students { get; } = new List<Student>();
+        public string GroupName { get; }
         public Student AddStudent(string name)
         {
-            _students.Add(new Student(name, this));
-            return _students[^0];
+            if (Students.Count >= 25)
+            {
+                throw new IsuException("Maximum group size reached");
+            }
+
+            Students.Add(new Student(name, this));
+            return Students[^0];
         }
     }
 }
