@@ -11,7 +11,7 @@ namespace Isu.Objects
         public Group AddGroup(string name)
         {
             _groups.Add(new Group(name));
-            return _groups[^0];
+            return _groups[^1];
         }
 
         public Student AddStudent(Group @group, string name)
