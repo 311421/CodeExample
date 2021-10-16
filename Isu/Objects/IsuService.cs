@@ -39,11 +39,11 @@ namespace Isu.Objects
         public List<Student> FindStudents(CourseNumber courseNumber)
         {
             var output = new List<Student>();
-            foreach (Group @group in _groups.Where(@group => @group.GroupName[2] == (int)courseNumber))
+            _groups.Where(@group => @group.GroupName[2] == (int)courseNumber).Select(group =>
             {
-                output.AddRange(@group.Students);
-            }
-
+                output.AddRange(group.Students);
+                return group;
+            });
             return output;
         }
 
