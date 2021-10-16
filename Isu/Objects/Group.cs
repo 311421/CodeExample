@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Isu.Tools;
 
 namespace Isu.Objects
@@ -41,6 +42,11 @@ namespace Isu.Objects
 
             Students.Add(new Student(name, this));
             return Students[^1];
+        }
+
+        public void RemoveStudent(string name)
+        {
+            Students.Remove(Students.FirstOrDefault(student => student.Name == name));
         }
     }
 }
