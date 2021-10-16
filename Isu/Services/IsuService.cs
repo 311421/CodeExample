@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Isu.Services;
+using Isu.Objects;
 using Isu.Tools;
 
-namespace Isu.Objects
+namespace Isu.Services
 {
     public class IsuService : IIsuService
     {
