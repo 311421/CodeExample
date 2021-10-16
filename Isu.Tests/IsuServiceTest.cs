@@ -20,16 +20,8 @@ namespace Isu.Tests
         {
             Group newGroup = _isuService.AddGroup("M3208");
             Student newStudent = _isuService.AddStudent(newGroup, "Vasya Pupkin");
-            if (_isuService.GetStudent(newStudent.StudentId) != newStudent)
-            {
-                Assert.Fail();
-            }
-
-            if (newGroup != newStudent.StudentGroup)
-            {
-                Assert.Fail();
-            }
-            
+            Assert.AreEqual(_isuService.GetStudent(newStudent.StudentId), newStudent);
+            Assert.AreEqual(newGroup, newStudent.StudentGroup);
             Assert.Pass();
         }
 
@@ -62,12 +54,8 @@ namespace Isu.Tests
             Group secondGroup = _isuService.AddGroup("M3209");
             Student newStudent = _isuService.AddStudent(firstGroup, "Vasya Pupkin");
             _isuService.ChangeStudentGroup(newStudent, secondGroup);
-            if (newStudent.StudentGroup == secondGroup)
-            {
-                Assert.Pass();
-            }
-
-            Assert.Fail();
+            Assert.AreEqual(newStudent.StudentGroup, secondGroup);
+            Assert.Pass();
         }
     }
 }
