@@ -30,9 +30,11 @@ namespace Isu.Objects
 
         public List<Student> Students { get; } = new List<Student>();
         public string GroupName { get; }
+        public int MaxGroupSize { get; set; } = 25;
+
         public Student AddStudent(string name)
         {
-            if (Students.Count >= 25)
+            if (Students.Count >= MaxGroupSize)
             {
                 throw new IsuException("Maximum group size reached");
             }
