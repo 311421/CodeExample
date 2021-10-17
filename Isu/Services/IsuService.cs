@@ -39,11 +39,7 @@ namespace Isu.Services
         public List<Student> FindStudents(CourseNumber courseNumber)
         {
             var output = new List<Student>();
-            _groups.Where(@group => @group.GroupName[2] == (int)courseNumber).Select(group =>
-            {
-                output.AddRange(group.Students);
-                return group;
-            });
+            _groups.Where(@group => @group.GroupName[2] == (int)courseNumber).SelectMany(group => group.Students);
             return output;
         }
 
