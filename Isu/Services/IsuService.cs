@@ -55,7 +55,7 @@ namespace Isu.Services
 
         public void ChangeStudentGroup(Student student, Group newGroup)
         {
-            if (newGroup.Students.Count >= 25)
+            if (newGroup.Students.Count >= newGroup.MaxGroupSize)
             {
                 throw new IsuException("Target group has reached its size limit");
             }
