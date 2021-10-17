@@ -20,7 +20,7 @@ namespace Isu.Objects
 
             for (int i = 1; i < 5; i++)
             {
-                if (name[i] < '0' || name[i] > '9')
+                if (name[i] < '1' || name[i] > '4')
                 {
                     throw new IsuException("Incorrect group name");
                 }
