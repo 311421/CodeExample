@@ -16,6 +16,11 @@ namespace Isu.Services
 
         public Student AddStudent(Group @group, string name)
         {
+            if (group == null || name == null)
+            {
+                throw new IsuException("Incorrect parameters");
+            }
+
             return group.AddStudent(name);
         }
 
@@ -56,6 +61,11 @@ namespace Isu.Services
             if (newGroup.Students.Count >= newGroup.MaxGroupSize)
             {
                 throw new IsuException("Target group has reached its size limit");
+            }
+
+            if (student == null)
+            {
+                throw new IsuException("Incorrect parameters");
             }
 
             student.ChangeGroup(newGroup);

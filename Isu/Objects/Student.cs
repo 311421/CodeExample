@@ -1,4 +1,4 @@
-﻿using System.Data.Common;
+﻿using Isu.Tools;
 
 namespace Isu.Objects
 {
@@ -7,6 +7,11 @@ namespace Isu.Objects
         private static int _uniqueStudentId = 0;
         public Student(string name, Group group)
         {
+            if (group == null)
+            {
+                throw new IsuException("Incorrect group");
+            }
+
             Name = name;
             StudentGroup = group;
             StudentId = _uniqueStudentId + 100000;
@@ -18,6 +23,11 @@ namespace Isu.Objects
         public Group StudentGroup { get; private set; }
         public void ChangeGroup(Group newGroup)
         {
+            if (newGroup == null)
+            {
+                throw new IsuException("Incorrect group name");
+            }
+
             StudentGroup.Students.Remove(this);
             newGroup.Students.Add(this);
             StudentGroup = newGroup;

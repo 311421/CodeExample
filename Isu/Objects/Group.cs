@@ -8,6 +8,11 @@ namespace Isu.Objects
     {
         public Group(string name)
         {
+            if (name == null)
+            {
+                throw new IsuException("Incorrect group name");
+            }
+
             if (name.Length != 5)
             {
                 throw new IsuException("Incorrect group name");
