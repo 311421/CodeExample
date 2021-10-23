@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Shops.Services;
+using Shops.Tools;
 
 namespace Shops.Entities
 {
@@ -7,10 +10,12 @@ namespace Shops.Entities
     {
         private List<Product> _orderList;
         private Customer _customer;
-        public Order(List<Product> orderList, Customer customer)
+        private ShopData _shopData;
+        public Order(List<Product> orderList, Customer customer, ShopData shopData = null)
         {
-            _orderList = orderList;
-            _customer = customer;
+            _orderList = orderList ?? throw new ShopException("Invalid product list argument");
+            _customer = customer ?? throw new ShopException("Invalid customer argument");
+            _shopData = shopData ?? ShopData.DefaultData;
         }
 
         public ReadOnlyCollection<Product> OrderList => _orderList.AsReadOnly();
