@@ -6,7 +6,7 @@ namespace Shops.Entities
 {
     public class Shop
     {
-        private List<Product> _products = new List<Product>();
+        private Dictionary<string, uint> _products = new Dictionary<string, uint>();
         private string _name;
         private string _address;
 
@@ -31,7 +31,12 @@ namespace Shops.Entities
 
         public void AddProduct(ProductType productType, uint amount)
         {
-            _products.Add(new Product(productType, amount));
+            if (_products.ContainsKey(productType.Name))
+            {
+                _products[productType.Name] += amount;
+            }
+
+            _products.Add(productType.Name, amount);
         }
     }
 }

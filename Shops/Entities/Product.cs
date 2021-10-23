@@ -1,4 +1,5 @@
-﻿using Shops.Tools;
+﻿using System.Collections.ObjectModel;
+using Shops.Tools;
 
 namespace Shops.Entities
 {
@@ -11,5 +12,7 @@ namespace Shops.Entities
             _productType = productType;
             _amount = amount;
         }
+
+        public string ProductName => _productType.Name;
     }
 }

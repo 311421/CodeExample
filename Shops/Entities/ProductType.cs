@@ -7,5 +7,10 @@
         {
             _name = name;
         }
+
+        public string Name
+        {
+            get => new string(_name);
+        }
     }
 }
