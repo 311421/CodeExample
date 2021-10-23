@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Shops.Services;
 using Shops.Tools;
 
@@ -12,13 +13,8 @@ namespace Shops.Entities
 
         public Shop(string name, string address, ShopData shopData = null)
         {
-            if (name == null || address == null)
-            {
-                throw new ShopException();
-            }
-
-            _name = name;
-            _address = address;
+            _name = name ?? throw new ShopException("Incorrect name");
+            _address = address ?? throw new ShopException("Incorrect address");
             if (shopData == null)
             {
                 ShopData.DefaultData.AddShop(this);
@@ -31,6 +27,7 @@ namespace Shops.Entities
 
         public void AddProduct(ProductType productType, uint amount)
         {
+            if (productType == null) throw new ShopException("Incorrect product");
             if (_products.ContainsKey(productType.Name))
             {
                 _products[productType.Name] += amount;

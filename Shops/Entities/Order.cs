@@ -14,8 +14,8 @@ namespace Shops.Entities
         private ShopData _shopData;
         public Order(List<Product> orderList, Customer customer, ShopData shopData = null)
         {
-            _orderList = orderList ?? throw new ShopException("Invalid product list argument");
-            _customer = customer ?? throw new ShopException("Invalid customer argument");
+            _orderList = orderList ?? throw new ShopException("Incorrect order list");
+            _customer = customer ?? throw new ShopException("Incorrect customer");
             _shopData = shopData ?? ShopData.DefaultData;
         }
 

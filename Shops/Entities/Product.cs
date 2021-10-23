@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Shops.Tools;
 
 namespace Shops.Entities
@@ -9,7 +10,7 @@ namespace Shops.Entities
         private uint _amount;
         public Product(ProductType productType, uint amount)
         {
-            _productType = productType;
+            _productType = productType ?? throw new ShopException("Incorrect product type");
             _amount = amount;
         }
 
