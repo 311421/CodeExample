@@ -7,7 +7,7 @@ namespace Shops.Entities
 {
     public class Shop
     {
-        private Dictionary<string, uint> _products = new Dictionary<string, uint>();
+        private Dictionary<string, Product> _products = new Dictionary<string, Product>();
         private string _name;
         private string _address;
 
@@ -25,27 +25,25 @@ namespace Shops.Entities
             }
         }
 
-        public void AddProduct(ProductType productType, uint amount)
+        public void AddProduct(ProductType productType, uint amount, uint price)
         {
             if (productType == null) throw new ShopException("Incorrect product");
             if (_products.ContainsKey(productType.Name))
             {
-                _products[productType.Name] += amount;
+                _products[productType.Name].Amount += amount;
             }
 
-            _products.Add(productType.Name, amount);
+            _products.Add(productType.Name, new Product(productType, amount, price));
         }
 
         public void RemoveProduct(ProductType productType, uint amount)
         {
-            if (_products[productType.Name] < amount)
+            if (_products[productType.Name].Amount < amount)
             {
                 throw new ShopException("Reduced value is lower than parameter");
             }
 
-            _products[productType.Name] -= amount;
+            _products[productType.Name].Amount -= amount;
         }
-
-
     }
 }
