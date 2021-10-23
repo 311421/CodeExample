@@ -35,5 +35,17 @@ namespace Shops.Entities
 
             _products.Add(productType.Name, amount);
         }
+
+        public void RemoveProduct(ProductType productType, uint amount)
+        {
+            if (_products[productType.Name] < amount)
+            {
+                throw new ShopException("Reduced value is lower than parameter");
+            }
+
+            _products[productType.Name] -= amount;
+        }
+
+
     }
 }
