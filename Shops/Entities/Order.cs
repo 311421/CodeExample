@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Shops.Services;
 using Shops.Tools;
 
@@ -18,6 +19,6 @@ namespace Shops.Entities
             _shopData = shopData ?? ShopData.DefaultData;
         }
 
-        public ReadOnlyCollection<Product> OrderList => _orderList.AsReadOnly();
+        public List<Product> OrderList => new List<Product>(_orderList);
     }
 }
