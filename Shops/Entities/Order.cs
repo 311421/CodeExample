@@ -20,5 +20,20 @@ namespace Shops.Entities
         }
 
         public List<Request> OrderList => new List<Request>(_orderList);
+
+        public Shop FindBestShop()
+        {
+            float? minPrice = float.MaxValue;
+            Shop bestShop = null;
+            foreach (Shop shop in _shopData.ShopList)
+            {
+                float? curPrice = shop.OrderPrice(this);
+                if (minPrice < curPrice) continue;
+                minPrice = curPrice;
+                bestShop = shop;
+            }
+
+            return bestShop;
+        }
     }
 }

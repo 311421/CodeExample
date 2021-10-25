@@ -21,5 +21,7 @@ namespace Shops.Services
         {
             _shops.Add(shop);
         }
+
+        public List<Shop> ShopList => new List<Shop>(_shops);
     }
 }
