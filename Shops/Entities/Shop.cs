@@ -47,18 +47,6 @@ namespace Shops.Entities
             _products[productType.Name].Amount -= amount;
         }
 
-        private float? PriceOf(Request request)
-        {
-            if (request == null) throw new ShopException("Incorrect order");
-            Product product = _products[request.ProductName];
-            if (product.Amount < request.Amount)
-            {
-                return null;
-            }
-
-            return product.Price * request.Amount;
-        }
-
         public float? OrderPrice(Order order)
         {
             float? totalPrice = 0;
@@ -75,6 +63,18 @@ namespace Shops.Entities
             }
 
             return totalPrice;
+        }
+
+        private float? PriceOf(Request request)
+        {
+            if (request == null) throw new ShopException("Incorrect order");
+            Product product = _products[request.ProductName];
+            if (product.Amount < request.Amount)
+            {
+                return null;
+            }
+
+            return product.Price * request.Amount;
         }
     }
 }
