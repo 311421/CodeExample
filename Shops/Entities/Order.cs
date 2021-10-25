@@ -7,18 +7,18 @@ using Shops.Tools;
 
 namespace Shops.Entities
 {
-    public struct Order
+    public class Order
     {
-        private List<Product> _orderList;
+        private List<Request> _orderList;
         private Customer _customer;
         private ShopData _shopData;
-        public Order(List<Product> orderList, Customer customer, ShopData shopData = null)
+        public Order(List<Request> orderList, Customer customer, ShopData shopData = null)
         {
             _orderList = orderList ?? throw new ShopException("Incorrect order list");
             _customer = customer ?? throw new ShopException("Incorrect customer");
             _shopData = shopData ?? ShopData.DefaultData;
         }
 
-        public List<Product> OrderList => new List<Product>(_orderList);
+        public List<Request> OrderList => new List<Request>(_orderList);
     }
 }
