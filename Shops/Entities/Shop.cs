@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Shops.Services;
 using Shops.Tools;
 
@@ -44,6 +45,36 @@ namespace Shops.Entities
             }
 
             _products[productType.Name].Amount -= amount;
+        }
+
+        private float? PriceOf(Request request)
+        {
+            if (request == null) throw new ShopException("Incorrect order");
+            Product product = _products[request.ProductName];
+            if (product.Amount < request.Amount)
+            {
+                return null;
+            }
+
+            return product.Price * request.Amount;
+        }
+
+        public float? OrderPrice(Order order)
+        {
+            float? totalPrice = 0;
+            foreach (float? curPrice in order.OrderList.Select(request => PriceOf(request)))
+            {
+                if (curPrice != null)
+                {
+                    totalPrice += curPrice;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            return totalPrice;
         }
     }
 }
