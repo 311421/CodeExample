@@ -32,9 +32,12 @@ namespace Shops.Entities
             if (_products.ContainsKey(productType.Name))
             {
                 _products[productType.Name].Amount += amount;
+                _products[productType.Name].Price = price;
             }
-
-            _products.Add(productType.Name, new Product(productType, amount, price));
+            else
+            {
+                _products.Add(productType.Name, new Product(productType, amount, price));
+            }
         }
 
         public void RemoveProduct(string product, uint amount)
