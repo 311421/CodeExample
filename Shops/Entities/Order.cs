@@ -35,5 +35,23 @@ namespace Shops.Entities
 
             return bestShop;
         }
+
+        public void ExecuteOrder(Shop shop)
+        {
+            if (shop == null) throw new ShopException("Invalid shop argument");
+            if (!_shopData.ShopList.Contains(shop)) throw new ShopException("Shop argument is from another database");
+            float? orderPrice = shop.OrderPrice(this);
+            if (orderPrice == null) throw new ShopException("Can't complete order in this shop");
+            if (orderPrice > _customer.Money)
+            {
+                throw new ShopException("Not enough money");
+            }
+
+            _customer.Money -= (float)orderPrice;
+            foreach (Request request in _orderList)
+            {
+                shop.RemoveProduct(request.ProductName, request.Amount);
+            }
+        }
     }
 }

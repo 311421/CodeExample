@@ -1,4 +1,6 @@
-﻿namespace Shops.Entities
+﻿using Shops.Tools;
+
+namespace Shops.Entities
 {
     public class Customer
     {
@@ -8,6 +10,23 @@
         {
             _money = money;
             _name = name;
+        }
+
+        public float Money
+        {
+            get
+            {
+                return _money;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ShopException("Invalid customer money");
+                }
+
+                _money = value;
+            }
         }
     }
 }

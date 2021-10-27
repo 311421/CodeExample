@@ -9,6 +9,7 @@ namespace Shops.Services
         private List<Shop> _shops = new List<Shop>();
         private HashSet<ProductType> _productTypes = new HashSet<ProductType>();
         public static ShopData DefaultData { get; } = new ();
+        public List<Shop> ShopList => new List<Shop>(_shops);
 
         public ProductType RegisterProduct(string name)
         {
@@ -21,7 +22,5 @@ namespace Shops.Services
         {
             _shops.Add(shop);
         }
-
-        public List<Shop> ShopList => new List<Shop>(_shops);
     }
 }

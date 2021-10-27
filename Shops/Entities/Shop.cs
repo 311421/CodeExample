@@ -37,14 +37,14 @@ namespace Shops.Entities
             _products.Add(productType.Name, new Product(productType, amount, price));
         }
 
-        public void RemoveProduct(ProductType productType, uint amount)
+        public void RemoveProduct(string product, uint amount)
         {
-            if (_products[productType.Name].Amount < amount)
+            if (_products[product].Amount < amount)
             {
                 throw new ShopException("Reduced value is lower than parameter");
             }
 
-            _products[productType.Name].Amount -= amount;
+            _products[product].Amount -= amount;
         }
 
         public float? OrderPrice(Order order)
