@@ -12,11 +12,18 @@ namespace Shops.Entities
         private List<Request> _orderList;
         private Customer _customer;
         private ShopData _shopData;
+        public Order(List<Request> orderList, Customer customer)
+        {
+            _orderList = orderList ?? throw new ShopException("Incorrect order list");
+            _customer = customer ?? throw new ShopException("Incorrect customer");
+            _shopData = ShopData.DefaultData;
+        }
+
         public Order(List<Request> orderList, Customer customer, ShopData shopData = null)
         {
             _orderList = orderList ?? throw new ShopException("Incorrect order list");
             _customer = customer ?? throw new ShopException("Incorrect customer");
-            _shopData = shopData ?? ShopData.DefaultData;
+            _shopData = shopData;
         }
 
         public List<Request> OrderList => new List<Request>(_orderList);
@@ -28,7 +35,7 @@ namespace Shops.Entities
             foreach (Shop shop in _shopData.ShopList)
             {
                 float? curPrice = shop.OrderPrice(this);
-                if (minPrice < curPrice) continue;
+                if (minPrice < curPrice || curPrice == null) continue;
                 minPrice = curPrice;
                 bestShop = shop;
             }

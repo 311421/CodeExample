@@ -12,18 +12,33 @@ namespace Shops.Entities
         private string _name;
         private string _address;
 
-        public Shop(string name, string address, ShopData shopData = null)
+        public Shop(string name, string address, ShopData shopData)
         {
             _name = name ?? throw new ShopException("Incorrect name");
             _address = address ?? throw new ShopException("Incorrect address");
-            if (shopData == null)
-            {
-                ShopData.DefaultData.AddShop(this);
-            }
-            else
-            {
-                shopData.AddShop(this);
-            }
+            shopData.AddShop(this);
+        }
+
+        public Shop(string name, string address)
+        {
+            _name = name ?? throw new ShopException("Incorrect name");
+            _address = address ?? throw new ShopException("Incorrect address");
+            ShopData.DefaultData.AddShop(this);
+        }
+
+        public float ProductPrice(ProductType productType)
+        {
+            return _products[productType.Name].Price;
+        }
+
+        public float ProductAmount(ProductType productType)
+        {
+            return _products[productType.Name].Amount;
+        }
+
+        public void ChangeProductPrice(ProductType productType, float targetValue)
+        {
+            _products[productType.Name].Price = targetValue;
         }
 
         public void AddProduct(ProductType productType, uint amount, uint price)
