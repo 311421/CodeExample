@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Isu.Objects;
 using Isu.Tools;
+using IsuExtra;
 using NUnit.Framework;
 
 namespace IsuExtra.Tests
@@ -14,26 +15,26 @@ namespace IsuExtra.Tests
         private Faculty _faculty1;
         private Faculty _faculty2;
         private Stream _stream1;
-        
+
 
         [SetUp]
         public void Setup()
         {
             _isuService = new ExIsuService();
-            
+
             _faculty1 = _isuService.CreateFaculty("ITIP");
             _faculty2 = _isuService.CreateFaculty("FTMI");
             _stream1 = _faculty1.CreateStream("Stream");
             _group = _isuService.AddGroup("M3208", _stream1);
             _student = _isuService.AddStudent(_group, "Fedor");
             // Creating 7-pair schedule on Monday 
-            for (uint i = 0; i<8; i++)
+            for (uint i = 0; i < 8; i++)
             {
-                Pair newPair = _isuService.CreatePair("Albert Einstein", 
+                Pair newPair = _isuService.CreatePair("Albert Einstein",
                     _group, "666", Weekday.Mon, i);
                 _isuService.AssignPair(newPair, _stream1);
             }
-            
+
             _isuService.UnassignPair(_stream1, Weekday.Mon, 5);
             //
             _ognp = _isuService.CreateOgnp(_faculty2, "something");
