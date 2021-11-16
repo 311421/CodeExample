@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Isu.Objects;
 using Isu.Tools;
-using IsuExtra;
+using IsuExtra.Entities;
+using IsuExtra.Services;
 using NUnit.Framework;
 
 namespace IsuExtra.Tests
