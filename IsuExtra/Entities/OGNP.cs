@@ -2,7 +2,6 @@
 {
     public class OGNP
     {
-        private Schedule _schedule = new Schedule();
         private string _name;
 
         public OGNP(Faculty faculty, string name)
@@ -12,6 +11,6 @@
         }
 
         public Faculty Faculty { get; }
-        public Schedule Schedule => _schedule;
+        public Schedule Schedule { get; } = new Schedule();
     }
 }

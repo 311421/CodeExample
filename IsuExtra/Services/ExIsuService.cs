@@ -54,27 +54,19 @@ namespace IsuExtra
             return _studentOgnps[student.StudentId];
         }
 
-        public Pair CreatePair(string teacher, Group @group, string classroom, Weekday weekday, uint pairNum)
+        public Pair CreatePair(string teacher, Schedule schedule, string classroom, DayOfWeek weekday, uint pairNum)
         {
-            return new Pair(teacher, @group, classroom, weekday, pairNum);
+            var pair = new Pair(teacher, schedule, classroom, weekday, pairNum);
+            schedule.AssignPair(pair);
+            return pair;
         }
 
-        public void AssignPair(Pair pair, OGNP ognp)
-        {
-            ognp.Schedule.AssignPair(pair);
-        }
-
-        public void AssignPair(Pair pair, Stream stream)
-        {
-            stream.Schedule.AssignPair(pair);
-        }
-
-        public void UnassignPair(OGNP ognp, Weekday day, uint pairNum)
+        public void UnassignPair(OGNP ognp, DayOfWeek day, uint pairNum)
         {
             ognp.Schedule.RemovePair(day, pairNum);
         }
 
-        public void UnassignPair(Stream stream, Weekday day, uint pairNum)
+        public void UnassignPair(Stream stream, DayOfWeek day, uint pairNum)
         {
             stream.Schedule.RemovePair(day, pairNum);
         }

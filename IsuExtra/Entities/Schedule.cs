@@ -1,4 +1,5 @@
-﻿using Isu.Tools;
+﻿using System;
+using Isu.Tools;
 
 namespace IsuExtra
 {
@@ -15,7 +16,7 @@ namespace IsuExtra
             _schedule[(int)pair.Weekday, pair.PairNum] = pair;
         }
 
-        public void RemovePair(Weekday day, uint pairNum)
+        public void RemovePair(DayOfWeek day, uint pairNum)
         {
             if (_schedule[(int)day, pairNum] == null) throw new IsuException("No pair at this time");
             _schedule[(int)day, pairNum] = null;
