@@ -1,19 +1,19 @@
 ﻿using System;
 using Isu.Tools;
 
-namespace IsuExtra
+namespace IsuExtra.Entities
 {
     public class Schedule
     {
-        private Pair[,] _schedule = new Pair[6, 8];
+        private Lesson[,] _schedule = new Lesson[6, 8];
 
         public Schedule() { }
 
-        public void AssignPair(Pair pair)
+        public void AssignPair(Lesson lesson)
         {
-            if (pair == null) throw new IsuException("Pair is null");
-            if (_schedule[(int)pair.Weekday, pair.PairNum] != null) throw new IsuException("Overlapping pairs");
-            _schedule[(int)pair.Weekday, pair.PairNum] = pair;
+            if (lesson == null) throw new IsuException("Pair is null");
+            if (_schedule[(int)lesson.Weekday, lesson.PairNum] != null) throw new IsuException("Overlapping pairs");
+            _schedule[(int)lesson.Weekday, lesson.PairNum] = lesson;
         }
 
         public void RemovePair(DayOfWeek day, uint pairNum)

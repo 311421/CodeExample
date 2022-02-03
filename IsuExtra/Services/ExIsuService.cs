@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Isu.Objects;
 using Isu.Tools;
+using IsuExtra.Entities;
 
-namespace IsuExtra
+namespace IsuExtra.Services
 {
     public class ExIsuService
     {
@@ -54,9 +55,9 @@ namespace IsuExtra
             return _studentOgnps[student.StudentId];
         }
 
-        public Pair CreatePair(string teacher, Schedule schedule, string classroom, DayOfWeek weekday, uint pairNum)
+        public Lesson CreatePair(string teacher, Schedule schedule, string classroom, DayOfWeek weekday, uint pairNum)
         {
-            var pair = new Pair(teacher, schedule, classroom, weekday, pairNum);
+            var pair = new Lesson(teacher, schedule, classroom, weekday, pairNum);
             schedule.AssignPair(pair);
             return pair;
         }

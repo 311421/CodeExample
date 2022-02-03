@@ -2,15 +2,15 @@
 using Isu.Objects;
 using Isu.Tools;
 
-namespace IsuExtra
+namespace IsuExtra.Entities
 {
-    public class Pair
+    public class Lesson
     {
         private string _teacher;
         private Schedule _schedule;
         private string _classroom;
 
-        public Pair(string teacher, Schedule schedule, string classroom, DayOfWeek weekday, uint pairNum)
+        public Lesson(string teacher, Schedule schedule, string classroom, DayOfWeek weekday, uint pairNum)
         {
             _teacher = teacher ?? throw new IsuException("Invalid teacher name");
             _schedule = schedule;

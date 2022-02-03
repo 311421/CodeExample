@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Isu.Objects;
 
-namespace IsuExtra
+namespace IsuExtra.Entities
 {
     public class Faculty
     {

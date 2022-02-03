@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Isu.Objects;
 using Isu.Tools;
+using IsuExtra.Entities;
+using IsuExtra.Services;
 using NUnit.Framework;
 
 namespace IsuExtra.Tests
@@ -29,12 +32,11 @@ namespace IsuExtra.Tests
             // Creating 7-pair schedule on Monday 
             for (uint i = 0; i < 8; i++)
             {
-                Pair newPair = _isuService.CreatePair("Albert Einstein",
-                    _group, "666", Weekday.Mon, i);
-                _isuService.AssignPair(newPair, _stream1);
+                Lesson newLesson = _isuService.CreatePair("Albert Einstein",
+                    _stream1.Schedule, "666", DayOfWeek.Monday, i);
             }
 
-            _isuService.UnassignPair(_stream1, Weekday.Mon, 5);
+            _isuService.UnassignPair(_stream1, DayOfWeek.Monday, 5);
             //
             _ognp = _isuService.CreateOgnp(_faculty2, "something");
         }
@@ -42,8 +44,7 @@ namespace IsuExtra.Tests
         [Test]
         public void AddingStudentOgnp()
         {
-            Pair newPair = _isuService.CreatePair("Zhak Fresko", _group, "666", Weekday.Mon, 5);
-            _isuService.AssignPair(newPair, _ognp);
+            Lesson newLesson = _isuService.CreatePair("Zhak Fresko", _ognp.Schedule, "666", DayOfWeek.Monday, 5);
             _isuService.AssignOgnp(_student, _ognp);
             Assert.NotNull(_isuService.FindStudentOgnp(_student.Name));
         }
@@ -52,8 +53,7 @@ namespace IsuExtra.Tests
         public void AssigningStudentToOwnFaculty()
         {
             _ognp = _isuService.CreateOgnp(_faculty1, "something");
-            Pair newPair = _isuService.CreatePair("Zhak Fresko", _group, "666", Weekday.Mon, 5);
-            _isuService.AssignPair(newPair, _ognp);
+            Lesson newLesson = _isuService.CreatePair("Zhak Fresko", _ognp.Schedule, "666", DayOfWeek.Monday, 5);
             Assert.Catch<IsuException>(() =>
             {
                 _isuService.AssignOgnp(_student, _ognp);
@@ -63,8 +63,7 @@ namespace IsuExtra.Tests
         [Test]
         public void UnassignOgnp()
         {
-            Pair newPair = _isuService.CreatePair("Zhak Fresko", _group, "666", Weekday.Mon, 5);
-            _isuService.AssignPair(newPair, _ognp);
+            Lesson newLesson = _isuService.CreatePair("Zhak Fresko", _ognp.Schedule, "666", DayOfWeek.Monday, 5);
             _isuService.AssignOgnp(_student, _ognp);
             _isuService.UnassignOgnp(_student);
             Assert.IsNull(_isuService.FindStudentOgnp(_student.Name));
